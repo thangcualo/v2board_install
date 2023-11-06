@@ -187,7 +187,7 @@ echo -e "\033[36m#                                                              
 echo -e "\033[36m#######################################################################\033[0m"
 rm -rf /usr/share/nginx/html/v2board
 cd /usr/share/nginx/html
-git clone https://github.com/v2board/v2board.git
+git clone https://github.com/wyx2685/v2board
 cd /usr/share/nginx/html/v2board
 echo -e "\033[36m请输入y确认安装： \033[0m"
 sh /usr/share/nginx/html/v2board/init.sh
