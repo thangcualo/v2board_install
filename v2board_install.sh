@@ -52,13 +52,18 @@ echo -e "\033[36m#                 正在下载安装包，时间较长 请稍�
 echo -e "\033[36m#                                                                     #\033[0m"
 echo -e "\033[36m#######################################################################\033[0m"
 # 下载安装包
-git clone https://gitee.com/gz1903/lnmp_rpm.git /usr/local/src/lnmp_rpm
+apt -y install nginx python3-certbot-nginx mariadb-server redis-server
 cd /usr/local/src/lnmp_rpm
 # 安装nginx，mysql，php，redis
-echo -e "\033[36m下载完成，开始安装~\033[0m"
-rpm -ivhU /usr/local/src/lnmp_rpm/*.rpm --nodeps --force --nosignature
- 
+apt -y install curl apt-transport-https ca-certificates lsb-release
+curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+apt -y install php7.4-common php7.4-cli \
+php7.4-fpm php7.4-gd php7.4-mysql php7.4-mbstring \
+php7.4-curl php7.4-xml php7.4-xmlrpc php7.4-zip \
+php7.4-intl php7.4-bz2 php7.4-bcmath php7.4-redis
 # 启动nmp
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 systemctl start php-fpm.service mysqld redis
 
 # 加入开机启动
