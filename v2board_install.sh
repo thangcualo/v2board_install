@@ -39,10 +39,10 @@ echo -e "\033[36m#                                                              
 echo -e "\033[36m#                  正在配置Firewall策略 请稍等~                       #\033[0m"
 echo -e "\033[36m#                                                                     #\033[0m"
 echo -e "\033[36m#######################################################################\033[0m"
-firewall-cmd --zone=public --add-port=80/tcp --permanent
-firewall-cmd --zone=public --add-port=443/tcp --permanent
-firewall-cmd --reload
-firewall-cmd --zone=public --list-ports
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80
+sudo ufw allow 443
 #放行TCP80、443端口
 
 
@@ -198,7 +198,7 @@ chmod -R 777 /usr/share/nginx/html/v2board
 echo "* * * * * root /usr/bin/php /usr/share/nginx/html/v2board/artisan schedule:run >/dev/null 2>/dev/null &" >> /etc/crontab
 # 安装Node.js
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-yum -y install nodejs
+sudo -y install nodejs
 npm install -g n
 n 17
 node -v
